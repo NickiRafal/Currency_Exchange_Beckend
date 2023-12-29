@@ -1,6 +1,5 @@
 package com.kodilla.currency_exchange_beckend.controller;
 
-import com.kodilla.currency_exchange_beckend.controller.CashBalanceController;
 import com.kodilla.currency_exchange_beckend.domain.CashBalance;
 import com.kodilla.currency_exchange_beckend.domain.CashBalanceDTO;
 import com.kodilla.currency_exchange_beckend.domain.Currencies;
@@ -8,6 +7,7 @@ import com.kodilla.currency_exchange_beckend.service.CashBalanceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

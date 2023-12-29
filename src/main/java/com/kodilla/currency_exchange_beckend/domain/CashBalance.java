@@ -18,7 +18,6 @@ public class CashBalance {
 
     @Id
     private String currencyCode;
-
     private BigDecimal balance;
     private LocalDateTime lastUpdated;
     private BigDecimal totalBalance;

@@ -26,7 +26,6 @@ public class CashBalanceService {
                     .map(this::convertToDto)
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            // Handle exception accordingly
             throw new RuntimeException("Failed to retrieve cash balances", e);
         }
     }
@@ -36,7 +35,6 @@ public class CashBalanceService {
             Optional<CashBalance> cashBalance = repository.findByCurrencyCode(currencyCode);
             return cashBalance.map(this::convertToDto);
         } catch (Exception e) {
-            // Handle exception accordingly
             throw new RuntimeException("Failed to retrieve cash balance by currency code", e);
         }
     }
@@ -46,7 +44,6 @@ public class CashBalanceService {
             CashBalance cashBalance = convertToEntity(cashBalanceDTO);
             return convertToDto(repository.save(cashBalance));
         } catch (Exception e) {
-            // Handle exception accordingly
             throw new RuntimeException("Failed to add or update cash balance", e);
         }
     }
@@ -60,17 +57,29 @@ public class CashBalanceService {
             }
             return false;
         } catch (Exception e) {
-            // Handle exception accordingly
             throw new RuntimeException("Failed to delete cash balance by currency code", e);
         }
     }
 
     private CashBalanceDTO convertToDto(CashBalance cashBalance) {
-        return modelMapper.map(cashBalance, CashBalanceDTO.class);
+        if (cashBalance != null) {
+            return modelMapper.map(cashBalance, CashBalanceDTO.class);
+        }
+
+        else {
+
+            throw new IllegalArgumentException("cashBalanceDTO is null");
+        }
     }
 
     private CashBalance convertToEntity(CashBalanceDTO cashBalanceDTO) {
-        return modelMapper.map(cashBalanceDTO, CashBalance.class);
+        if (cashBalanceDTO != null) {
+            return modelMapper.map(cashBalanceDTO, CashBalance.class);
+        } else {
+
+            throw new IllegalArgumentException("cashBalanceDTO is null");
+
+        }
     }
 
     public CashBalanceDTO updateCashBalance(String currencyCode, CashBalanceDTO cashBalanceDTO) {

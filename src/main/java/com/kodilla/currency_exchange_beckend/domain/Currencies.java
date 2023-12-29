@@ -31,4 +31,13 @@ public class Currencies {
     @OneToMany(mappedBy = "currencyTo")
     private List<Transactions> transactionsTo;
 
+    public Currencies(Long currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public Currencies(Long currencyId, String currencyCode) {
+        this.currencyId = currencyId;
+        this.currencyCode = currencyCode;
+    }
 }
+

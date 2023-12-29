@@ -27,7 +27,7 @@ public class CurrenciesService {
                     .collect(Collectors.toList());
             return currencies;
         } catch (Exception e) {
-            // Handle exception accordingly
+
             throw new RuntimeException("Failed to retrieve all currencies", e);
         }
     }

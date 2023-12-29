@@ -2,7 +2,9 @@ package com.kodilla.currency_exchange_beckend.controller;
 
 import com.kodilla.currency_exchange_beckend.domain.TransactionsDTO;
 import com.kodilla.currency_exchange_beckend.service.TransactionsService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,11 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/v1/transactions")
 @RequiredArgsConstructor
+
 public class TransactionsController {
 
     private final TransactionsService transactionsService;
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<List<TransactionsDTO>> getAllTransactions() {
@@ -78,5 +81,8 @@ public class TransactionsController {
 
     private TransactionsDTO convertToDto(TransactionsDTO transaction) {
         return modelMapper.map(transaction, TransactionsDTO.class);
+    }
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 }
