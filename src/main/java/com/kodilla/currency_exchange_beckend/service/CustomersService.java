@@ -46,7 +46,10 @@ public class CustomersService {
     }
 
     public boolean deleteCustomer(Long id) {
-        repository.deleteById(id);
-        return true;
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }return false;
     }
+
 }

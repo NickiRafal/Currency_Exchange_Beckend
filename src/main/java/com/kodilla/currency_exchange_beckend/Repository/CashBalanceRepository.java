@@ -1,8 +1,6 @@
 package com.kodilla.currency_exchange_beckend.Repository;
 
 import com.kodilla.currency_exchange_beckend.domain.CashBalance;
-import com.kodilla.currency_exchange_beckend.domain.Currencies;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
