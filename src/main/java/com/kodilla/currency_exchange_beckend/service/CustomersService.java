@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +32,9 @@ public class CustomersService {
 
     public CustomersDTO createCustomer(CustomersDTO customerDTO) {
         Customers customer = modelMapper.map(customerDTO, Customers.class);
+        System.out.println("Mapped Customer: " + customer.toString());
         Customers savedCustomer = repository.save(customer);
+        System.out.println("Saved Customer: " + savedCustomer.toString());
         return modelMapper.map(savedCustomer, CustomersDTO.class);
     }
 
@@ -50,6 +53,13 @@ public class CustomersService {
             repository.deleteById(id);
             return true;
         }return false;
+    }
+    public boolean isEmailAlreadyRegistered(String email) {
+        Optional<Customers> existingCustomer = repository.findByEmail(email);
+        return existingCustomer.isPresent();
+    }
+    public boolean isEmailTaken(String email) {
+        return repository.existsByEmail(email);
     }
 
 }

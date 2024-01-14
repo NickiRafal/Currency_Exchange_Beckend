@@ -35,12 +35,19 @@ public class CustomersController {
     @PostMapping("/add")
     public ResponseEntity<CustomersDTO> createCustomer(@RequestBody CustomersDTO customerDTO) {
         try {
+            if (customersService.isEmailAlreadyRegistered(customerDTO.getEmail())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
             CustomersDTO createdCustomer = customersService.createCustomer(customerDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+//    @PostMapping("/log")
+//    public ResponseEntity <CustomersDTO> login (@RequestBody CustomersDTO customersDTO){
+//
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CustomersDTO> getCustomerById(@PathVariable Long id) {
@@ -77,4 +84,35 @@ public class CustomersController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    @PostMapping("add/check-email")
+    public ResponseEntity<CheckEmailResponse> checkEmail(@RequestBody CustomersDTO customersDTO) {
+        System.out.println("Received request with email: " + customersDTO.getEmail());
+        // Sprawdź, czy istnieje już klient o podanym adresie e-mail
+        boolean isEmailTaken = customersService.isEmailAlreadyRegistered(customersDTO.getEmail());
+        System.out.println(isEmailTaken);
+        // Utwórz obiekt odpowiedzi
+        CheckEmailResponse response = new CheckEmailResponse();
+        response.setEmailTaken(isEmailTaken);
+
+        // Zwróć odpowiedź z treścią
+        if (isEmailTaken) {
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
+
+    // Dodatkowy prosty obiekt do przechowywania informacji o zajętości adresu e-mail
+    public class CheckEmailResponse {
+        private boolean emailTaken;
+
+        public boolean isEmailTaken() {
+            return emailTaken;
+        }
+
+        public void setEmailTaken(boolean emailTaken) {
+            this.emailTaken = emailTaken;
+        }
+    }
+
 }

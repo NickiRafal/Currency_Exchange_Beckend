@@ -18,6 +18,8 @@ public class CustomersDTO {
     private String email;
     private BigDecimal totalSpent;
     private LocalDate registrationDate;
-
+    private String password;
+    private String login;
+    private Boolean status;
 }
 
