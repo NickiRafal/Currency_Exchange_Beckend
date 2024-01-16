@@ -38,9 +38,9 @@ public class CustomersControllerTest {
     @Test
     public void getAllCustomers_ShouldReturnListOfCustomers() {
         // Given
-        List<CustomersDTO> mockCustomers = Collections.singletonList(new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test"));
+        List<CustomersDTO> mockCustomers = Collections.singletonList(new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false));
         when(customersService.getAllCustomers()).thenReturn(mockCustomers);
-        when(modelMapper.map(any(), eq(CustomersDTO.class))).thenReturn(new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test"));
+        when(modelMapper.map(any(), eq(CustomersDTO.class))).thenReturn(new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false));
 
         // When
         ResponseEntity<List<CustomersDTO>> response = customersController.getAllCustomers();
@@ -65,8 +65,8 @@ public class CustomersControllerTest {
     @Test
     public void createCustomer_ShouldReturnCreatedCustomer() {
         // Given
-        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test");
-        CustomersDTO createdCustomerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test");
+        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false);
+        CustomersDTO createdCustomerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false);
 
         when(customersService.createCustomer(customerDTO)).thenReturn(createdCustomerDTO);
 
@@ -81,7 +81,7 @@ public class CustomersControllerTest {
     @Test
     public void createCustomer_ShouldReturnInternalServerError() {
         // Given
-        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test");
+        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false);
 
         when(customersService.createCustomer(customerDTO)).thenThrow(new RuntimeException());
 
@@ -95,7 +95,7 @@ public class CustomersControllerTest {
     public void getCustomerById_ShouldReturnCustomer() {
         // Given
         Long customerId = 1L;
-        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test");
+        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false);
 
         when(customersService.getCustomerById(customerId)).thenReturn(customerDTO);
 
@@ -140,8 +140,8 @@ public class CustomersControllerTest {
     public void updateCustomer_ShouldReturnUpdatedCustomer() {
         // Given
         Long customerId = 1L;
-        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test");
-        CustomersDTO updatedCustomerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(120.00), LocalDate.of(2023,05,06),"Test");
+        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false);
+        CustomersDTO updatedCustomerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(120.00), LocalDate.of(2023,05,06),"Test","Test",false);
 
         when(customersService.updateCustomer(customerId, customerDTO)).thenReturn(updatedCustomerDTO);
 
@@ -157,7 +157,7 @@ public class CustomersControllerTest {
     public void updateCustomer_ShouldReturnNotFound() {
         // Given
         Long customerId = 1L;
-        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test");
+        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false);
 
         // Ustawienie sytuacji, w której metoda serwisu zwraca null
         when(customersService.updateCustomer(customerId, customerDTO)).thenReturn(null);
@@ -173,7 +173,7 @@ public class CustomersControllerTest {
     public void updateCustomer_ShouldReturnInternalServerError() {
         // Given
         Long customerId = 1L;
-        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test");
+        CustomersDTO customerDTO = new CustomersDTO(1L,"Rafal","Nicki","test@test.com", BigDecimal.valueOf(100.00), LocalDate.of(2023,05,06),"Test","Test",false);
 
         // Ustawienie sytuacji, w której metoda serwisu zwraca wyjątek
         when(customersService.updateCustomer(customerId, customerDTO)).thenThrow(new RuntimeException());
