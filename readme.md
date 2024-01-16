@@ -33,7 +33,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
 ### 1. Uruchomienie aplikacji
 
-   Znajdź klasę główną (z adnotacją @SpringBootApplication).
+   Znajdź klasę główną CurrencyExchangeBeckendApplication(z adnotacją @SpringBootApplication).
    Kliknij prawym przyciskiem myszy na klasie głównej i wybierz opcję "Run".
    
 ## Praca
@@ -46,3 +46,5 @@ Aplikacja pracuje na porcie server.port=8081
 
 ### 1. Frontend https://github.com/NickiRafal/Currency_Exchange_Frontend.git
 ### 2. Beckend  https://github.com/NickiRafal/Currency_Exchange_Beckend.git
+
+### Aplikacja nie jest ukończona ! Na chwilę obecną działa tylko rejestracja użytkownika.
